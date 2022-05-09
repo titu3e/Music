@@ -37,7 +37,7 @@ def get_readable_time(seconds: int) -> str:
     return ping_time
 
 
-@Client.on_message(command(["ping", "repo", "anon", "alive"]) & filters.group & ~filters.edited & ~filters.private)
+@Client.on_message(command(["vcping"]) & filters.group & ~filters.edited & ~filters.private)
 
 async def help(client: Client, message: Message):
     await message.delete()
@@ -47,24 +47,20 @@ async def help(client: Client, message: Message):
     mem = psutil.virtual_memory().percent
     disk = psutil.disk_usage("/").percent
     start = datetime.now()
-    end = datetime.now()
-    resp = (end - start).microseconds / 1000
-    await message.reply_sticker("CAACAgUAAxkBAAEENxZiNtPdibVkMsjLZrUG9NK4hotHQgAC2wEAAoM12VSdN9ujxVtnUyME")
+    resp = (datetime.now() - start).microseconds / 1000
+    await message.reply_sticker("CAACAgUAAx0CXJU7zQABCEDkYnk5pTbx5HvEbd3trrY2rc66j_IAArYCAAJ8vfFUbqGdrKTeHgwkBA")
     rahul = await message.reply_photo(
         photo=f"{PING_IMG}",
-        caption="🍑 ᴩɪɴɢɪɴɢ... 🍑",
+        caption="Pong...",
     )
     await rahul.edit_text(
-        f"""<b> ᴩᴏɴɢ ʙᴀʙʏ ! 🍑</b>\n  🏓 `{resp} ᴍs`\n\n<b><u>{BOT_NAME} sʏsᴛᴇᴍ sᴛᴀᴛs:</u></b>\n\n• ᴜᴩᴛɪᴍᴇ : {bot_uptime}\n• ᴄᴩᴜ : {cpu}%\n• ᴅɪsᴋ : {disk}%\n• ʀᴀᴍ : {mem}""",
+        f"""<b> Pong ! </b>\n  🏓 `{resp} ms`\n\n<b><u>{BOT_NAME} sʏsᴛᴇᴍ sᴛᴀᴛs:</u></b>\n\n• Uptime : {bot_uptime}\n• CPU : {cpu}%\n• Disk : {disk}%\n• RAM : {mem}""",
         reply_markup=InlineKeyboardMarkup(
             [
                 [
                     InlineKeyboardButton(
-                        "💖 sᴜᴘᴘᴏʀᴛ 💖", url=f"https://t.me/{SUPPORT_GROUP}"
+                        "Support", url=f"https://t.me/{SUPPORT_GROUP}"
                     ),
-                    InlineKeyboardButton(
-                        "🙄 sᴏᴜʀᴄᴇ 🙄", url="https://github.com/AnonymousR1025/FallenMusic"
-                    )
                 ]
             ]
         ),
