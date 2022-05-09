@@ -14,7 +14,7 @@ def time_to_seconds(time):
     return sum(int(x) * 60 ** i for i, x in enumerate(reversed(stringt.split(':'))))
 
 
-@Client.on_message(filters.command(["song", "music", " vsong", "video"]) & ~filters.private & ~filters.channel)
+@Client.on_message(filters.command(["song","video"]) & ~filters.private & ~filters.channel)
 def song(client, message):
 
     message.delete()
@@ -49,13 +49,13 @@ def song(client, message):
         )
         print(str(e))
         return
-    m.edit(f"» ᴅᴏᴡɴʟᴏᴀᴅɪɴɢ sᴏɴɢ ꜰʀᴏᴍ {bn} sᴇʀᴠᴇʀ ʙᴀʙʏ​.")
+    m.edit(f"» ᴅᴏᴡɴʟᴏᴀᴅɪɴɢ sᴏɴɢ ꜰʀᴏᴍ {bn} sᴇʀᴠᴇʀ.")
     try:
         with yt_dlp.YoutubeDL(ydl_opts) as ydl:
             info_dict = ydl.extract_info(link, download=False)
             audio_file = ydl.prepare_filename(info_dict)
             ydl.process_info(info_dict)
-        rep = f"**• ᴜᴘʟᴏᴀᴅᴇᴅ ʙʏ​ » [{bn}](t.me/{bu}) 💕\n• ʀᴇǫᴜᴇsᴛᴇᴅ ʙʏ​ » {chutiya}\n• sᴇᴀʀᴄʜᴇᴅ ғᴏʀ » {query}**"
+        rep = f"**• ᴜᴘʟᴏᴀᴅᴇᴅ ʙʏ​ » [{bn}](t.me/{bu})\n• ʀᴇǫᴜᴇsᴛᴇᴅ ʙʏ​ » {chutiya}\n• sᴇᴀʀᴄʜᴇᴅ ғᴏʀ » {query}**"
         secmul, dur, dur_arr = 1, 0, duration.split(':')
         for i in range(len(dur_arr)-1, -1, -1):
             dur += (int(dur_arr[i]) * secmul)
@@ -63,7 +63,7 @@ def song(client, message):
         message.reply_audio(audio_file, caption=rep, thumb=thumb_name, parse_mode='md', title=title, duration=dur)
         m.delete()
     except Exception as e:
-        m.edit("**» ᴅᴏᴡɴʟᴏᴀᴅɪɴɢ ᴇʀʀᴏʀ, ʀᴇᴩᴏʀᴛ ᴛʜɪs ᴀᴛ​ » [{bn} sᴜᴩᴩᴏʀᴛ](t.me/{bu}) 💕**")
+        m.edit("**» ᴅᴏᴡɴʟᴏᴀᴅɪɴɢ ᴇʀʀᴏʀ, ʀᴇᴩᴏʀᴛ ᴛʜɪs ᴀᴛ​ » [{bn} sᴜᴩᴩᴏʀᴛ](t.me/{bu})**")
         print(e)
 
     try:
